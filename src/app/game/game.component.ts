@@ -90,8 +90,10 @@ export class GameComponent implements OnInit {
 
   loadWords() {
     this.hasSelectedCategory = true;
-    this.words = this.wordsService.getWords(this.selectedCategory);
-    this.nextCouple();
+    this.wordsService.getWords(this.selectedCategory).subscribe(words => {
+      this.words = words;
+      this.nextCouple();
+    });
   }
 
   startRound() {
@@ -139,7 +141,9 @@ export class GameComponent implements OnInit {
 
   private dropWord() {
     if (this.words.length === 1) {
-      this.words = this.wordsService.getWords(this.selectedCategory);
+      this.wordsService.getWords(this.selectedCategory).subscribe(words => {
+        this.words = words;
+      });
       return;
     }
     this.words.shift();
