@@ -1,0 +1,329 @@
+// Colores personalizados
+$primary-color: #00d1b2
+$secondary-color: #3273dc
+$success-color: #48c774
+$warning-color: #ffdd57
+$danger-color: #f14668
+$dark-color: #363636
+$light-color: #f5f5f5
+
+// Animaciones
+@keyframes fadeIn
+  from
+    opacity: 0
+    transform: translateY(-20px)
+  to
+    opacity: 1
+    transform: translateY(0)
+
+@keyframes  pulse
+  0%, 100%
+    transform: scale(1)
+  50%
+    transform: scale(1.05)
+
+@keyframes slideInRight
+  from
+    opacity: 0
+    transform: translateX(50px)
+  to
+    opacity: 1
+    transform: translateX(0)
+
+@keyframes bounceIn
+  0%
+    opacity: 0
+    transform: scale(0.3)
+  50%
+    transform: scale(1.05)
+  70%
+    transform: scale(0.9)
+  100%
+    opacity: 1
+    transform: scale(1)
+
+@keyframes shake
+  0%, 100%
+    transform: translateX(0)
+  10%, 30%, 50%, 70%, 90%
+    transform: translateX(-10px)
+  20%, 40%, 60%, 80%
+    transform: translateX(10px)
+
+// Estilos generales
+.container
+  min-height: 100vh
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)
+  padding: 2rem 1rem
+
+.title
+  animation: fadeIn 0.6s ease-out
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1)
+
+.box
+  animation: fadeIn 0.8s ease-out
+  border-radius: 12px
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1)
+  transition: all 0.3s ease
+  background: rgba(255,255,255,0.98)
+
+  &:hover
+    transform: translateY(-4px)
+    box-shadow: 0 12px 24px rgba(0,0,0,0.15)
+
+.block
+  animation: slideInRight 0.6s ease-out
+
+// Estilos para inputs
+.input
+  border-radius: 8px
+  border: 2px solid transparent
+  transition: all 0.3s ease
+  font-size: 1.1rem
+  padding: 1.5rem 1rem
+
+  &:focus
+    border-color: $primary-color
+    box-shadow: 0 0 0 0.125em rgba(0, 209, 178, 0.25)
+    transform: scale(1.02)
+
+// Estilos para botones
+.button
+  border-radius: 8px
+  font-weight: 600
+  transition: all 0.3s ease
+  text-transform: uppercase
+  letter-spacing: 0.5px
+  padding: 1.5rem 2rem
+  font-size: 1rem
+
+  &:hover:not(:disabled)
+    transform: translateY(-2px)
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15)
+
+  &:active:not(:disabled)
+    transform: translateY(0)
+
+  &.is-primary
+    background: linear-gradient(135deg, #00d1b2 0%, #00947e 100%)
+    
+    &:hover:not(:disabled)
+      background: linear-gradient(135deg, #00b89c 0%, #007a65 100%)
+
+  &.is-success
+    background: linear-gradient(135deg, #48c774 0%, #3aa05b 100%)
+    
+    &:hover:not(:disabled)
+      background: linear-gradient(135deg, #3ab865 0%, #2f8a4c 100%)
+
+  &.is-danger
+    background: linear-gradient(135deg, #f14668 0%, #d62c4e 100%)
+    
+    &:hover:not(:disabled)
+      background: linear-gradient(135deg, #e6395b 0%, #c72543 100%)
+
+  &.is-warning
+    background: linear-gradient(135deg, #ffdd57 0%, #f0c514 100%)
+    color: #363636
+    
+    &:hover:not(:disabled)
+      background: linear-gradient(135deg, #f7d747 0%, #dab312 100%)
+
+  &.is-info
+    background: linear-gradient(135deg, #3273dc 0%, #2860be 100%)
+    
+    &:hover:not(:disabled)
+      background: linear-gradient(135deg, #2b68cc 0%, #2355a8 100%)
+
+// Select completamente personalizado
+.custom-select
+  appearance: none
+  -webkit-appearance: none
+  -moz-appearance: none
+  width: 100%
+  max-width: 400px
+  margin: 0 auto
+  display: block
+  border-radius: 8px
+  font-size: 1.2rem
+  padding: 1rem 3rem 1rem 1.5rem
+  border: 2px solid #dbdbdb
+  transition: all 0.3s ease
+  background-color: #ffffff
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23363636' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")
+  background-repeat: no-repeat
+  background-position: right 1rem center
+  background-size: 1.5rem
+  color: #363636
+  cursor: pointer
+  font-weight: 600
+  text-transform: capitalize
+
+  &:hover
+    border-color: $primary-color
+
+  &:focus
+    border-color: $primary-color
+    box-shadow: 0 0 0 0.125em rgba(0, 209, 178, 0.25)
+    outline: none
+  
+  option
+    color: #363636
+    background-color: #ffffff
+    padding: 0.75rem
+    font-weight: 500
+    text-transform: capitalize
+
+    &:disabled
+      color: #b5b5b5
+
+// Fallback para estilos de Bulma si existen
+.field .control .select.is-large select
+  color: #363636 !important
+  background-color: #ffffff !important
+
+// Lista de participantes
+.content ul
+  list-style: none
+  padding: 0
+
+  li
+    padding: 0.8rem 1.2rem
+    margin: 0.5rem 0
+    background: linear-gradient(90deg, rgba(0,209,178,0.1) 0%, rgba(0,209,178,0.05) 100%)
+    border-left: 4px solid $primary-color
+    border-radius: 0 8px 8px 0
+    animation: slideInRight 0.4s ease-out
+    transition: all 0.3s ease
+
+    &:hover
+      background: linear-gradient(90deg, rgba(0,209,178,0.15) 0%, rgba(0,209,178,0.08) 100%)
+      transform: translateX(5px)
+
+// Tarjeta de palabra (lo más importante)
+.notification.is-primary
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)
+  animation: bounceIn 0.6s ease-out
+  padding: 3rem 2rem
+  border-radius: 16px
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2)
+  min-height: 200px
+  display: flex
+  align-items: center
+  justify-content: center
+
+  .title
+    color: white
+    font-size: 3rem
+    font-weight: 800
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.3)
+    animation: pulse 2s ease-in-out infinite
+    letter-spacing: 1px
+
+// Título principal
+h1.title.is-1
+  color: white
+  font-size: 3.5rem
+  font-weight: 800
+  text-shadow: 3px 3px 6px rgba(0,0,0,0.2)
+  margin-bottom: 2rem
+  animation: bounceIn 0.8s ease-out
+
+// Subtítulos con colores
+.has-text-primary
+  color: $primary-color !important
+  font-weight: 700
+
+.has-text-success
+  color: $success-color !important
+  font-weight: 700
+  font-size: 2.5rem !important
+
+.has-text-warning
+  color: #ff8c00 !important
+  font-weight: 700
+  text-transform: capitalize
+  font-size: 1.3rem
+
+// Etiquetas
+.label
+  font-size: 1.2rem
+  font-weight: 600
+  color: $dark-color
+  margin-bottom: 0.8rem
+
+// Botones centrados
+.buttons.is-centered
+  margin-top: 2rem
+  gap: 1rem
+
+  .button
+    min-width: 160px
+
+// Puntajes finales
+.content ul li
+  font-size: 1.2rem
+  font-weight: 500
+
+// Timer
+.subtitle.is-4
+  font-size: 1.5rem
+  font-weight: 600
+  color: $dark-color
+  margin-bottom: 1.5rem
+
+// Sección winner
+.title.is-2
+  font-size: 2.5rem
+  margin-bottom: 1.5rem
+
+.title.is-4
+  font-size: 1.8rem
+  color: $dark-color
+
+// Responsive
+@media screen and (max-width: 768px)
+  .container
+    padding: 1rem 0.5rem
+
+  .title.is-1
+    font-size: 2.5rem !important
+
+  .notification.is-primary .title
+    font-size: 2rem !important
+
+  .button
+    padding: 1rem 1.5rem
+    font-size: 0.9rem
+
+  .buttons.is-centered .button
+    min-width: 120px
+
+  .select.is-large select
+    font-size: 1rem
+    padding: 0.8rem 2rem
+
+// Animación para botones de juego
+.buttons .button.is-success,
+.buttons .button.is-danger
+  font-size: 1.3rem
+  padding: 1.5rem 3rem
+  min-width: 180px
+  font-weight: 700
+
+  &:hover:not(:disabled)
+    animation: pulse 0.6s ease-in-out
+
+// Estado deshabilitado mejorado
+.button:disabled
+  opacity: 0.5
+  cursor: not-allowed
+  transform: none !important
+
+// Efecto para el ganador
+div:has(> .title:contains("ganador"))
+  animation: bounceIn 1s ease-out
+
+// Mejora visual del fondo del container principal
+.section
+  background: transparent

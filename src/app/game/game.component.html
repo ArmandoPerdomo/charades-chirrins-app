@@ -1,7 +1,7 @@
 <div class="container">
   <br>
   <div class="block">
-    <h1 class="title is-1 has-text-centered">Chirrins' Charadas 🥳</h1>
+    <h1 class="title is-1 has-text-centered">🎭 Chirrins' Charadas 🎉</h1>
   </div>
   <div *ngIf="!gameStarted" class="section">
     <div class="columns is-variable is-5">
@@ -14,7 +14,7 @@
                      placeholder="E.g., Pedro y Ana, Samuel y Paola">
             </div>
             <div class="block has-text-centered">
-              <button type="submit" class="button is-primary is-large is-outlined" (click)="addCouple()">Añadir
+              <button type="submit" class="button is-primary is-large is-outlined" (click)="addCouple()">➕ Añadir
               </button>
             </div>
           </div>
@@ -30,10 +30,10 @@
             </ul>
           </div>
           <div class="buttons block is-centered">
-            <button class="button is-success" [disabled]="startingCouples.length <= 1" (click)="startGame()">Empezar a
+            <button class="button is-success" [disabled]="startingCouples.length <= 1" (click)="startGame()">🎮 Empezar a
               Jugar
             </button>
-            <button class="button is-danger" [disabled]="startingCouples.length <= 1" (click)="reset()">Reiniciar
+            <button class="button is-danger" [disabled]="startingCouples.length <= 1" (click)="reset()">🔄 Reiniciar
             </button>
           </div>
         </div>
@@ -44,18 +44,16 @@
   <div *ngIf="gameStarted" class="section">
     <div *ngIf="!hasSelectedCategory" class="box has-text-centered">
       <div class="field">
-        <label class="label">Selecciona una Categoría:</label>
+        <label class="label">📋 Selecciona una Categoría:</label>
         <div class="control">
-          <div class="select is-rounded is-large is-primary">
-            <select [(ngModel)]="selectedCategory">
-              <option value='' disabled>Seleccione una categoría</option>
-              <option *ngFor="let category of categories" [value]="category"
-                      class="is-capitalized">{{ category }}</option>
-            </select>
-          </div>
+          <select class="custom-select" [(ngModel)]="selectedCategory">
+            <option value='' disabled selected>Seleccione una categoría</option>
+            <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+          </select>
         </div>
       </div>
-      <button class="button is-info" (click)="loadWords()">Siguiente</button>
+      <br>
+      <button class="button is-info is-large" (click)="loadWords()" [disabled]="!selectedCategory">▶️ Siguiente</button>
     </div>
 
     <div *ngIf="currentCouple && !roundEnded" class="box has-text-centered">
@@ -66,17 +64,17 @@
       <h4 class="subtitle is-4">Categoría: <span class="has-text-warning"> {{ selectedCategory }} </span></h4>
       <br>
       <h2 class="title is-2">Puntaje: <span class="has-text-success">{{ currentCouple.score }}</span></h2>
-      <button [disabled]="isCouplePlaying" class="button is-warning" (click)="startRound()">Comenzar</button>
+      <button [disabled]="isCouplePlaying" class="button is-warning is-large" (click)="startRound()">🚀 Comenzar</button>
     </div>
 
     <div *ngIf="isCouplePlaying" class="box has-text-centered">
-      <h4 class="subtitle is-4">Tiempo Disponible: {{ timer$ | async | date:'mm:ss' }} </h4>
+      <h4 class="subtitle is-4">⏱️ Tiempo Disponible: {{ timer$ | async | date:'mm:ss' }} </h4>
       <div class="block notification is-primary">
         <h2 class="title is-2 is-capitalized"> {{ words[0] }} </h2>
       </div>
       <div class="buttons block is-centered">
-        <button class="button is-success" (click)="correctWord()">Correcto</button>
-        <button class="button is-danger" (click)="passWord()">Siguiente</button>
+        <button class="button is-success" (click)="correctWord()">✅ Correcto</button>
+        <button class="button is-danger" (click)="passWord()">➡️ Siguiente</button>
       </div>
     </div>
 
@@ -96,7 +94,7 @@
         <li *ngFor="let couple of endingCouples">{{ couple.name }}: {{ couple.score }}</li>
       </ul>
       <div class="has-text-centered">
-        <button class="button is-primary" (click)="restartGame()">Volver a Jugar</button>
+        <button class="button is-primary is-large" (click)="restartGame()">🔁 Volver a Jugar</button>
       </div>
     </div>
   </div>
