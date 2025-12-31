@@ -182,6 +182,61 @@ $light-color: #f5f5f5
   color: #363636 !important
   background-color: #ffffff !important
 
+// Estilos para los participantes con botones de editar/eliminar
+.content
+  max-height: 400px
+  overflow-y: auto
+  padding-right: 0.5rem
+
+  // Estilos personalizados del scrollbar para participantes
+  &::-webkit-scrollbar
+    width: 8px
+
+  &::-webkit-scrollbar-track
+    background: rgba(0,0,0,0.05)
+    border-radius: 10px
+
+  &::-webkit-scrollbar-thumb
+    background: linear-gradient(135deg, #00d1b2 0%, #00947e 100%)
+    border-radius: 10px
+
+    &:hover
+      background: linear-gradient(135deg, #00b89c 0%, #007a65 100%)
+
+  // Para Firefox
+  scrollbar-width: thin
+  scrollbar-color: #00d1b2 rgba(0,0,0,0.05)
+
+.participant-item
+  display: flex
+  justify-content: space-between
+  align-items: center
+  padding: 0.8rem 1.2rem
+  margin: 0.5rem 0
+  background: linear-gradient(90deg, rgba(0,209,178,0.1) 0%, rgba(0,209,178,0.05) 100%)
+  border-left: 4px solid $primary-color
+  border-radius: 0 8px 8px 0
+  animation: slideInRight 0.4s ease-out
+  transition: all 0.3s ease
+
+  &:hover
+    background: linear-gradient(90deg, rgba(0,209,178,0.15) 0%, rgba(0,209,178,0.08) 100%)
+    transform: translateX(5px)
+
+  .participant-name
+    flex: 1
+    font-weight: 500
+    font-size: 1rem
+
+  .participant-actions
+    display: flex
+    gap: 0.5rem
+
+    .button
+      padding: 0.3rem 0.6rem
+      border-radius: 4px
+      font-size: 0.9rem
+
 // Lista de participantes
 .content ul
   list-style: none
@@ -320,10 +375,297 @@ h1.title.is-1
   cursor: not-allowed
   transform: none !important
 
-// Efecto para el ganador
-div:has(> .title:contains("ganador"))
-  animation: bounceIn 1s ease-out
+// Animaciones para el ganador
+@keyframes confetti
+  0%
+    transform: translateY(-100vh) rotate(0deg)
+    opacity: 1
+  100%
+    transform: translateY(100vh) rotate(720deg)
+    opacity: 0
+
+@keyframes celebration
+  0%, 100%
+    transform: scale(1) rotate(0deg)
+  25%
+    transform: scale(1.1) rotate(-5deg)
+  75%
+    transform: scale(1.1) rotate(5deg)
+
+@keyframes glow
+  0%, 100%
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.5)
+  50%
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.8), 0 0 60px rgba(255, 215, 0, 0.6)
+
+@keyframes firework
+  0%
+    transform: scale(0)
+    opacity: 1
+  100%
+    transform: scale(1)
+    opacity: 0
+
+// Estilos para la pantalla del ganador
+.winner-container
+  position: relative
+  overflow: hidden
+  padding: 3rem 2rem
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)
+  border-radius: 16px
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3)
+
+  .winner-title
+    animation: celebration 2s ease-in-out infinite, glow 2s ease-in-out infinite
+    color: #ffd700 !important
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8)
+    font-size: 3.5rem !important
+    font-weight: 900 !important
+
+  .winner-name
+    animation: bounceIn 1s ease-out, pulse 2s ease-in-out infinite 1s
+    color: #ffffff !important
+    font-size: 2.5rem !important
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.4)
+    font-weight: 800 !important
+
+  .winner-score
+    animation: fadeIn 1.5s ease-out
+    color: #ffd700 !important
+    font-size: 2rem !important
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3)
+
+// Efecto confetti
+.confetti
+  position: absolute
+  width: 10px
+  height: 10px
+  border-radius: 50%
+  animation: confetti 3s ease-in-out infinite
+
+  &:nth-child(1)
+    left: 10%
+    background: #ff6b6b
+    animation-delay: 0s
+
+  &:nth-child(2)
+    left: 20%
+    background: #4ecdc4
+    animation-delay: 0.2s
+
+  &:nth-child(3)
+    left: 30%
+    background: #ffe66d
+    animation-delay: 0.4s
+
+  &:nth-child(4)
+    left: 40%
+    background: #95e1d3
+    animation-delay: 0.6s
+
+  &:nth-child(5)
+    left: 50%
+    background: #f38181
+    animation-delay: 0.8s
+
+  &:nth-child(6)
+    left: 60%
+    background: #aa96da
+    animation-delay: 1s
+
+  &:nth-child(7)
+    left: 70%
+    background: #fcbad3
+    animation-delay: 1.2s
+
+  &:nth-child(8)
+    left: 80%
+    background: #a8e6cf
+    animation-delay: 1.4s
+
+  &:nth-child(9)
+    left: 90%
+    background: #ffd3b6
+    animation-delay: 1.6s
+
+  &:nth-child(10)
+    left: 15%
+    background: #ff8b94
+    animation-delay: 1.8s
+
+// Fireworks decorativos
+.firework
+  position: absolute
+  width: 50px
+  height: 50px
+  border: 3px solid #ffd700
+  border-radius: 50%
+  animation: firework 2s ease-out infinite
+
+  &:nth-child(1)
+    top: 20%
+    left: 10%
+    animation-delay: 0s
+
+  &:nth-child(2)
+    top: 30%
+    right: 10%
+    animation-delay: 0.5s
+
+  &:nth-child(3)
+    bottom: 30%
+    left: 15%
+    animation-delay: 1s
+
+  &:nth-child(4)
+    bottom: 20%
+    right: 15%
+    animation-delay: 1.5s
 
 // Mejora visual del fondo del container principal
 .section
   background: transparent
+
+// Estilos para la sección de puntajes
+.scores-section
+  margin-top: 2rem
+  padding: 2rem
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%)
+  border-radius: 12px
+  animation: fadeIn 1s ease-out
+
+  .scores-title
+    text-align: center
+    color: #363636
+    font-size: 2rem !important
+    font-weight: 800
+    margin-bottom: 1.5rem
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1)
+
+.scores-list
+  max-width: 600px
+  margin: 0 auto
+  max-height: 500px
+  overflow-y: auto
+  padding-right: 0.5rem
+
+  // Estilos personalizados del scrollbar
+  &::-webkit-scrollbar
+    width: 8px
+
+  &::-webkit-scrollbar-track
+    background: rgba(0,0,0,0.05)
+    border-radius: 10px
+
+  &::-webkit-scrollbar-thumb
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)
+    border-radius: 10px
+
+    &:hover
+      background: linear-gradient(135deg, #576dd8 0%, #664090 100%)
+
+  // Para Firefox
+  scrollbar-width: thin
+  scrollbar-color: #667eea rgba(0,0,0,0.05)
+
+.score-item
+  display: flex
+  align-items: center
+  padding: 1rem 1.5rem
+  margin: 0.8rem 0
+  background: white
+  border-radius: 12px
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1)
+  transition: all 0.3s ease
+  animation: slideInRight 0.5s ease-out
+  border-left: 5px solid transparent
+
+  &:hover
+    transform: translateX(10px)
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15)
+
+  &:nth-child(1)
+    border-left-color: #ffd700
+    background: linear-gradient(90deg, rgba(255, 215, 0, 0.1) 0%, white 20%)
+
+  &:nth-child(2)
+    border-left-color: #c0c0c0
+    background: linear-gradient(90deg, rgba(192, 192, 192, 0.1) 0%, white 20%)
+
+  &:nth-child(3)
+    border-left-color: #cd7f32
+    background: linear-gradient(90deg, rgba(205, 127, 50, 0.1) 0%, white 20%)
+
+  &:nth-child(n+4)
+    border-left-color: #00d1b2
+
+.score-rank
+  margin-right: 1.5rem
+
+  .rank-number
+    display: flex
+    align-items: center
+    justify-content: center
+    width: 50px
+    height: 50px
+    border-radius: 50%
+    font-size: 1.5rem
+    font-weight: 800
+    background: linear-gradient(135deg, #00d1b2 0%, #00947e 100%)
+    color: white
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2)
+    transition: all 0.3s ease
+
+    &.gold
+      background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)
+      color: #363636
+      animation: pulse 2s ease-in-out infinite
+      box-shadow: 0 6px 16px rgba(255, 215, 0, 0.4)
+
+    &.silver
+      background: linear-gradient(135deg, #c0c0c0 0%, #e8e8e8 100%)
+      color: #363636
+      box-shadow: 0 6px 12px rgba(192, 192, 192, 0.4)
+
+    &.bronze
+      background: linear-gradient(135deg, #cd7f32 0%, #e89b5f 100%)
+      color: white
+      box-shadow: 0 6px 12px rgba(205, 127, 50, 0.4)
+
+.score-info
+  flex: 1
+  display: flex
+  justify-content: space-between
+  align-items: center
+
+  .couple-name
+    font-size: 1.2rem
+    font-weight: 600
+    color: #363636
+
+  .couple-score
+    font-size: 1.4rem
+    font-weight: 700
+    color: #00d1b2
+    background: rgba(0, 209, 178, 0.1)
+    padding: 0.3rem 1rem
+    border-radius: 20px
+
+// Responsive para tabla de puntajes
+@media screen and (max-width: 768px)
+  .scores-section
+    padding: 1rem
+
+  .score-item
+    padding: 0.8rem 1rem
+
+    .couple-name
+      font-size: 1rem !important
+
+    .couple-score
+      font-size: 1.1rem !important
+
+  .score-rank .rank-number
+    width: 40px
+    height: 40px
+    font-size: 1.2rem

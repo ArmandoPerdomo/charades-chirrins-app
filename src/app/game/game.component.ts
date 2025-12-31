@@ -28,7 +28,7 @@ export class GameComponent implements OnInit {
   selectedCategory: string = '';
   words: string[] = [];
   currentCouple!: Couple | null;
-  REMAINING_TIME_IN_SECONDS: number = 60;
+  REMAINING_TIME_IN_SECONDS: number = 5;
   timer$!: Observable<number>;
   winner!: Couple | null;
   isCouplePlaying: boolean = false;
@@ -39,6 +39,8 @@ export class GameComponent implements OnInit {
   hasSelectedCategory: boolean = false;
   hasATie: boolean = false;
   categories: string[] = [];
+  isPaused: boolean = false;
+  pausedTimeRemaining: number = 0;
 
   @HostListener('window:keydown', ['$event'])
   handleKeyDown(event: KeyboardEvent): void {
@@ -71,12 +73,26 @@ export class GameComponent implements OnInit {
   }
 
   addCouple(): void {
-    this.startingCouples.push({
-      id: uuidv4(),
-      name: this.form.get('coupleName')?.value,
-      score: 0,
-    });
-    this.form.reset();
+    const coupleName = this.form.get('coupleName')?.value?.trim();
+    if (coupleName) {
+      this.startingCouples.push({
+        id: uuidv4(),
+        name: coupleName,
+        score: 0,
+      });
+      this.form.reset();
+    }
+  }
+
+  editCouple(couple: Couple): void {
+    const newName = prompt('Editar nombre de la pareja:', couple.name);
+    if (newName && newName.trim()) {
+      couple.name = newName.trim();
+    }
+  }
+
+  deleteCouple(coupleId: string): void {
+    this.startingCouples = this.startingCouples.filter(c => c.id !== coupleId);
   }
 
   startGame() {
@@ -110,14 +126,17 @@ export class GameComponent implements OnInit {
   }
 
   startTimer() {
+    const startTime = this.isPaused ? this.pausedTimeRemaining / 1000 : this.REMAINING_TIME_IN_SECONDS;
     this.timerRunning = true;
+    this.isPaused = false;
     this.timer$ = timer(0, 1000).pipe(
-      map(n => (this.REMAINING_TIME_IN_SECONDS - n) * 1000),
+      map(n => (startTime - n) * 1000),
       takeWhile(n => n >= 0),
       takeWhile(() => this.timerRunning),
     );
 
     this.timer$.subscribe(n => {
+      this.pausedTimeRemaining = n;
       if (n === 0) {
         this.endRound();
         if (this.startingCouples.length === 0) {
@@ -127,6 +146,29 @@ export class GameComponent implements OnInit {
         }
       }
     });
+  }
+
+  pauseGame() {
+    if (this.isCouplePlaying && this.timerRunning) {
+      this.isPaused = true;
+      this.timerRunning = false;
+    }
+  }
+
+  resumeGame() {
+    if (this.isCouplePlaying && this.isPaused) {
+      this.startTimer();
+    }
+  }
+
+  resetGame() {
+    const confirmed = confirm('¿Estás seguro de que deseas reiniciar el juego? Se perderán todos los puntajes actuales.');
+    if (confirmed) {
+      this.timerRunning = false;
+      this.isPaused = false;
+      this.pausedTimeRemaining = 0;
+      this.restartGame();
+    }
   }
 
   correctWord() {
@@ -174,6 +216,79 @@ export class GameComponent implements OnInit {
 
     this.isCouplePlaying = false;
     this.endingCouples.sort((a, b) => b.score - a.score);
+    
+    // Reproducir sonido de celebración
+    if (this.winner) {
+      this.playCelebrationSound();
+    }
+  }
+
+  private playCelebrationSound(): void {
+    try {
+      const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+      const now = audioContext.currentTime;
+
+      // Crear secuencia de notas festivas
+      const notes = [
+        { freq: 523.25, time: 0, duration: 0.15 },    // C5
+        { freq: 659.25, time: 0.15, duration: 0.15 }, // E5
+        { freq: 783.99, time: 0.3, duration: 0.15 },  // G5
+        { freq: 1046.50, time: 0.5, duration: 0.3 },  // C6
+      ];
+
+      notes.forEach(note => {
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+
+        oscillator.frequency.value = note.freq;
+        oscillator.type = 'sine';
+
+        gainNode.gain.setValueAtTime(0.3, now + note.time);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, now + note.time + note.duration);
+
+        oscillator.start(now + note.time);
+        oscillator.stop(now + note.time + note.duration);
+      });
+
+      // Agregar efecto de fuegos artificiales (sonido percusivo)
+      setTimeout(() => {
+        this.playFireworkSound(audioContext);
+      }, 800);
+
+    } catch (error) {
+      console.log('Audio no disponible:', error);
+    }
+  }
+
+  private playFireworkSound(audioContext: AudioContext): void {
+    const now = audioContext.currentTime;
+    
+    // Crear sonido de explosión
+    for (let i = 0; i < 3; i++) {
+      const noise = audioContext.createBufferSource();
+      const buffer = audioContext.createBuffer(1, audioContext.sampleRate * 0.1, audioContext.sampleRate);
+      const data = buffer.getChannelData(0);
+      
+      for (let j = 0; j < buffer.length; j++) {
+        data[j] = Math.random() * 2 - 1;
+      }
+      
+      noise.buffer = buffer;
+      
+      const noiseGain = audioContext.createGain();
+      noise.connect(noiseGain);
+      noiseGain.connect(audioContext.destination);
+      
+      const startTime = now + (i * 0.3);
+      noiseGain.gain.setValueAtTime(0.2, startTime);
+      noiseGain.gain.exponentialRampToValueAtTime(0.01, startTime + 0.1);
+      
+      noise.start(startTime);
+      noise.stop(startTime + 0.1);
+    }
   }
 
   reset() {
@@ -181,7 +296,12 @@ export class GameComponent implements OnInit {
   }
 
   restartGame() {
-    this.startingCouples = [];
+    // Recuperar las parejas de endingCouples y reiniciar sus puntajes
+    this.startingCouples = this.endingCouples.map(couple => ({
+      ...couple,
+      score: 0
+    }));
+    
     this.endingCouples = [];
     this.currentCouple = null;
     this.gameStarted = false;
@@ -190,5 +310,6 @@ export class GameComponent implements OnInit {
     this.selectedCategory = '';
     this.roundEnded = false;
     this.winner = null;
+    this.hasATie = false;
   }
 }
