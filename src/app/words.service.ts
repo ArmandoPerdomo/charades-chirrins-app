@@ -17,10 +17,13 @@ export class WordsService {
   private categories: string[] = [
     'animales',
     'profesiones',
-    'actividades',
+    'acciones',
     'emociones',
     'partes-del-cuerpo',
     'casa',
+    'deportes',
+    'comida',
+    'objetos',
     'ligadito'
   ];
 
