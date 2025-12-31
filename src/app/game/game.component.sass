@@ -1,387 +1,74 @@
-// Colores personalizados
-$primary-color: #00d1b2
-$secondary-color: #3273dc
-$success-color: #48c774
-$warning-color: #ffdd57
-$danger-color: #f14668
-$dark-color: #363636
-$light-color: #f5f5f5
+// Paleta de colores moderna
+$primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%)
+$secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%)
+$success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)
+$warning-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%)
+$danger-gradient: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%)
+$info-gradient: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)
 
-// Animaciones
-@keyframes fadeIn
+// Animaciones modernas
+@keyframes float
+  0%, 100%
+    transform: translateY(0px)
+  50%
+    transform: translateY(-20px)
+
+@keyframes fadeInUp
   from
     opacity: 0
-    transform: translateY(-20px)
+    transform: translateY(30px)
   to
     opacity: 1
     transform: translateY(0)
 
-@keyframes  pulse
-  0%, 100%
+@keyframes scaleIn
+  from
+    opacity: 0
+    transform: scale(0.8)
+  to
+    opacity: 1
     transform: scale(1)
-  50%
-    transform: scale(1.05)
 
 @keyframes slideInRight
   from
     opacity: 0
-    transform: translateX(50px)
+    transform: translateX(100px)
   to
     opacity: 1
     transform: translateX(0)
 
-@keyframes bounceIn
-  0%
-    opacity: 0
-    transform: scale(0.3)
+@keyframes pulse
+  0%, 100%
+    transform: scale(1)
   50%
     transform: scale(1.05)
-  70%
-    transform: scale(0.9)
+
+@keyframes shimmer
+  0%
+    background-position: -1000px 0
   100%
-    opacity: 1
-    transform: scale(1)
+    background-position: 1000px 0
 
-@keyframes shake
+@keyframes glow
   0%, 100%
-    transform: translateX(0)
-  10%, 30%, 50%, 70%, 90%
-    transform: translateX(-10px)
-  20%, 40%, 60%, 80%
-    transform: translateX(10px)
+    box-shadow: 0 0 20px rgba(102, 126, 234, 0.5), 0 0 40px rgba(102, 126, 234, 0.3)
+  50%
+    box-shadow: 0 0 40px rgba(102, 126, 234, 0.8), 0 0 80px rgba(102, 126, 234, 0.5)
 
-// Estilos generales
-.container
-  min-height: 100vh
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)
-  padding: 2rem 1rem
-
-.title
-  animation: fadeIn 0.6s ease-out
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.1)
-
-.box
-  animation: fadeIn 0.8s ease-out
-  border-radius: 12px
-  box-shadow: 0 8px 16px rgba(0,0,0,0.1)
-  transition: all 0.3s ease
-  background: rgba(255,255,255,0.98)
-
-  &:hover
-    transform: translateY(-4px)
-    box-shadow: 0 12px 24px rgba(0,0,0,0.15)
-
-.block
-  animation: slideInRight 0.6s ease-out
-
-// Estilos para inputs
-.input
-  border-radius: 8px
-  border: 2px solid transparent
-  transition: all 0.3s ease
-  font-size: 1.1rem
-  padding: 1.5rem 1rem
-
-  &:focus
-    border-color: $primary-color
-    box-shadow: 0 0 0 0.125em rgba(0, 209, 178, 0.25)
-    transform: scale(1.02)
-
-// Estilos para botones
-.button
-  border-radius: 8px
-  font-weight: 600
-  transition: all 0.3s ease
-  text-transform: uppercase
-  letter-spacing: 0.5px
-  padding: 1.5rem 2rem
-  font-size: 1rem
-
-  &:hover:not(:disabled)
-    transform: translateY(-2px)
-    box-shadow: 0 6px 12px rgba(0,0,0,0.15)
-
-  &:active:not(:disabled)
-    transform: translateY(0)
-
-  &.is-primary
-    background: linear-gradient(135deg, #00d1b2 0%, #00947e 100%)
-    
-    &:hover:not(:disabled)
-      background: linear-gradient(135deg, #00b89c 0%, #007a65 100%)
-
-  &.is-success
-    background: linear-gradient(135deg, #48c774 0%, #3aa05b 100%)
-    
-    &:hover:not(:disabled)
-      background: linear-gradient(135deg, #3ab865 0%, #2f8a4c 100%)
-
-  &.is-danger
-    background: linear-gradient(135deg, #f14668 0%, #d62c4e 100%)
-    
-    &:hover:not(:disabled)
-      background: linear-gradient(135deg, #e6395b 0%, #c72543 100%)
-
-  &.is-warning
-    background: linear-gradient(135deg, #ffdd57 0%, #f0c514 100%)
-    color: #363636
-    
-    &:hover:not(:disabled)
-      background: linear-gradient(135deg, #f7d747 0%, #dab312 100%)
-
-  &.is-info
-    background: linear-gradient(135deg, #3273dc 0%, #2860be 100%)
-    
-    &:hover:not(:disabled)
-      background: linear-gradient(135deg, #2b68cc 0%, #2355a8 100%)
-
-// Select completamente personalizado
-.custom-select
-  appearance: none
-  -webkit-appearance: none
-  -moz-appearance: none
-  width: 100%
-  max-width: 400px
-  margin: 0 auto
-  display: block
-  border-radius: 8px
-  font-size: 1.2rem
-  padding: 1rem 3rem 1rem 1.5rem
-  border: 2px solid #dbdbdb
-  transition: all 0.3s ease
-  background-color: #ffffff
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23363636' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")
-  background-repeat: no-repeat
-  background-position: right 1rem center
-  background-size: 1.5rem
-  color: #363636
-  cursor: pointer
-  font-weight: 600
-  text-transform: capitalize
-
-  &:hover
-    border-color: $primary-color
-
-  &:focus
-    border-color: $primary-color
-    box-shadow: 0 0 0 0.125em rgba(0, 209, 178, 0.25)
-    outline: none
-  
-  option
-    color: #363636
-    background-color: #ffffff
-    padding: 0.75rem
-    font-weight: 500
-    text-transform: capitalize
-
-    &:disabled
-      color: #b5b5b5
-
-// Fallback para estilos de Bulma si existen
-.field .control .select.is-large select
-  color: #363636 !important
-  background-color: #ffffff !important
-
-// Estilos para los participantes con botones de editar/eliminar
-.content
-  max-height: 400px
-  overflow-y: auto
-  padding-right: 0.5rem
-
-  // Estilos personalizados del scrollbar para participantes
-  &::-webkit-scrollbar
-    width: 8px
-
-  &::-webkit-scrollbar-track
-    background: rgba(0,0,0,0.05)
-    border-radius: 10px
-
-  &::-webkit-scrollbar-thumb
-    background: linear-gradient(135deg, #00d1b2 0%, #00947e 100%)
-    border-radius: 10px
-
-    &:hover
-      background: linear-gradient(135deg, #00b89c 0%, #007a65 100%)
-
-  // Para Firefox
-  scrollbar-width: thin
-  scrollbar-color: #00d1b2 rgba(0,0,0,0.05)
-
-.participant-item
-  display: flex
-  justify-content: space-between
-  align-items: center
-  padding: 0.8rem 1.2rem
-  margin: 0.5rem 0
-  background: linear-gradient(90deg, rgba(0,209,178,0.1) 0%, rgba(0,209,178,0.05) 100%)
-  border-left: 4px solid $primary-color
-  border-radius: 0 8px 8px 0
-  animation: slideInRight 0.4s ease-out
-  transition: all 0.3s ease
-
-  &:hover
-    background: linear-gradient(90deg, rgba(0,209,178,0.15) 0%, rgba(0,209,178,0.08) 100%)
-    transform: translateX(5px)
-
-  .participant-name
-    flex: 1
-    font-weight: 500
-    font-size: 1rem
-
-  .participant-actions
-    display: flex
-    gap: 0.5rem
-
-    .button
-      padding: 0.3rem 0.6rem
-      border-radius: 4px
-      font-size: 0.9rem
-
-// Lista de participantes
-.content ul
-  list-style: none
-  padding: 0
-
-  li
-    padding: 0.8rem 1.2rem
-    margin: 0.5rem 0
-    background: linear-gradient(90deg, rgba(0,209,178,0.1) 0%, rgba(0,209,178,0.05) 100%)
-    border-left: 4px solid $primary-color
-    border-radius: 0 8px 8px 0
-    animation: slideInRight 0.4s ease-out
-    transition: all 0.3s ease
-
-    &:hover
-      background: linear-gradient(90deg, rgba(0,209,178,0.15) 0%, rgba(0,209,178,0.08) 100%)
-      transform: translateX(5px)
-
-// Tarjeta de palabra (lo más importante)
-.notification.is-primary
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)
-  animation: bounceIn 0.6s ease-out
-  padding: 3rem 2rem
-  border-radius: 16px
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2)
-  min-height: 200px
-  display: flex
-  align-items: center
-  justify-content: center
-
-  .title
-    color: white
-    font-size: 3rem
-    font-weight: 800
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.3)
-    animation: pulse 2s ease-in-out infinite
-    letter-spacing: 1px
-
-// Título principal
-h1.title.is-1
-  color: white
-  font-size: 3.5rem
-  font-weight: 800
-  text-shadow: 3px 3px 6px rgba(0,0,0,0.2)
-  margin-bottom: 2rem
-  animation: bounceIn 0.8s ease-out
-
-// Subtítulos con colores
-.has-text-primary
-  color: $primary-color !important
-  font-weight: 700
-
-.has-text-success
-  color: $success-color !important
-  font-weight: 700
-  font-size: 2.5rem !important
-
-.has-text-warning
-  color: #ff8c00 !important
-  font-weight: 700
-  text-transform: capitalize
-  font-size: 1.3rem
-
-// Etiquetas
-.label
-  font-size: 1.2rem
-  font-weight: 600
-  color: $dark-color
-  margin-bottom: 0.8rem
-
-// Botones centrados
-.buttons.is-centered
-  margin-top: 2rem
-  gap: 1rem
-
-  .button
-    min-width: 160px
-
-// Puntajes finales
-.content ul li
-  font-size: 1.2rem
-  font-weight: 500
-
-// Timer
-.subtitle.is-4
-  font-size: 1.5rem
-  font-weight: 600
-  color: $dark-color
-  margin-bottom: 1.5rem
-
-// Sección winner
-.title.is-2
-  font-size: 2.5rem
-  margin-bottom: 1.5rem
-
-.title.is-4
-  font-size: 1.8rem
-  color: $dark-color
-
-// Responsive
-@media screen and (max-width: 768px)
-  .container
-    padding: 1rem 0.5rem
-
-  .title.is-1
-    font-size: 2.5rem !important
-
-  .notification.is-primary .title
-    font-size: 2rem !important
-
-  .button
-    padding: 1rem 1.5rem
-    font-size: 0.9rem
-
-  .buttons.is-centered .button
-    min-width: 120px
-
-  .select.is-large select
-    font-size: 1rem
-    padding: 0.8rem 2rem
-
-// Animación para botones de juego
-.buttons .button.is-success,
-.buttons .button.is-danger
-  font-size: 1.3rem
-  padding: 1.5rem 3rem
-  min-width: 180px
-  font-weight: 700
-
-  &:hover:not(:disabled)
-    animation: pulse 0.6s ease-in-out
-
-// Estado deshabilitado mejorado
-.button:disabled
-  opacity: 0.5
-  cursor: not-allowed
-  transform: none !important
-
-// Animaciones para el ganador
 @keyframes confetti
   0%
     transform: translateY(-100vh) rotate(0deg)
     opacity: 1
   100%
     transform: translateY(100vh) rotate(720deg)
+    opacity: 0
+
+@keyframes firework
+  0%
+    transform: scale(0)
+    opacity: 1
+  100%
+    transform: scale(1)
     opacity: 0
 
 @keyframes celebration
@@ -392,245 +79,609 @@ h1.title.is-1
   75%
     transform: scale(1.1) rotate(5deg)
 
-@keyframes glow
+@keyframes goldGlow
   0%, 100%
     text-shadow: 0 0 10px rgba(255, 215, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.5)
   50%
     text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.8), 0 0 60px rgba(255, 215, 0, 0.6)
 
-@keyframes firework
-  0%
-    transform: scale(0)
-    opacity: 1
-  100%
-    transform: scale(1)
-    opacity: 0
+// Container principal con fondo mejorado
+.container
+  min-height: 100vh
+  background: transparent
+  padding: 2rem 1rem
+  position: relative
 
-// Estilos para la pantalla del ganador
+  &::before
+    content: ''
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background: radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.1) 0%, transparent 50%)
+    pointer-events: none
+
+// Glassmorphism box
+.box
+  background: rgba(255, 255, 255, 0.1)
+  backdrop-filter: blur(20px)
+  -webkit-backdrop-filter: blur(20px)
+  border-radius: 20px
+  border: 1px solid rgba(255, 255, 255, 0.2)
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.1) inset
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+  animation: fadeInUp 0.8s ease-out
+  position: relative
+  overflow: hidden
+
+  &::before
+    content: ''
+    position: absolute
+    top: 0
+    left: -100%
+    width: 100%
+    height: 100%
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent)
+    transition: left 0.5s
+
+  &:hover
+    transform: translateY(-8px) scale(1.02)
+    box-shadow: 0 15px 50px rgba(102, 126, 234, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.2) inset
+    border-color: rgba(255, 255, 255, 0.3)
+
+    &::before
+      left: 100%
+
+// Título principal espectacular
+.title.is-1
+  background: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #ff6b6b 70%, #f093fb 100%)
+  background-clip: text
+  -webkit-background-clip: text
+  -webkit-text-fill-color: transparent
+  font-size: 3.5rem
+  font-weight: 900
+  text-align: center
+  animation: fadeInUp 1s ease-out, float 3s ease-in-out infinite
+  position: relative
+  margin-bottom: 2rem
+  filter: drop-shadow(0 4px 12px rgba(255, 215, 0, 0.6))
+
+  &::after
+    content: ''
+    position: absolute
+    bottom: -10px
+    left: 50%
+    transform: translateX(-50%)
+    width: 200px
+    height: 4px
+    background: linear-gradient(90deg, #ffd700, #ff6b6b, #f093fb)
+    border-radius: 2px
+    animation: shimmer 2s infinite
+
+// Títulos y subtítulos
+.title
+  color: #ffffff
+  font-weight: 700
+  animation: fadeInUp 0.6s ease-out
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2)
+
+  &.is-2
+    font-size: 2.5rem
+
+  &.is-3
+    font-size: 2rem
+
+  &.is-4
+    font-size: 1.8rem
+
+.subtitle
+  color: rgba(255, 255, 255, 0.9)
+  font-weight: 500
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2)
+
+// Labels modernos
+.label
+  color: rgba(255, 255, 255, 0.95)
+  font-size: 1.2rem
+  font-weight: 600
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)
+  margin-bottom: 1rem
+
+// Inputs glassmorphism
+.input
+  background: rgba(255, 255, 255, 0.1)
+  backdrop-filter: blur(10px)
+  border: 2px solid rgba(255, 255, 255, 0.2)
+  border-radius: 15px
+  color: #ffffff
+  font-size: 1.1rem
+  padding: 1.5rem 1.5rem
+  transition: all 0.3s ease
+  font-weight: 500
+
+  &::placeholder
+    color: rgba(255, 255, 255, 0.5)
+
+  &:focus
+    background: rgba(255, 255, 255, 0.15)
+    border-color: #667eea
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3), 0 8px 16px rgba(0, 0, 0, 0.2)
+    outline: none
+    transform: scale(1.02)
+
+// Botones modernos con gradientes
+.button
+  border: none
+  border-radius: 15px
+  font-weight: 600
+  font-size: 1rem
+  padding: 1.5rem 2.5rem
+  text-transform: uppercase
+  letter-spacing: 1px
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+  position: relative
+  overflow: hidden
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2)
+
+  &::before
+    content: ''
+    position: absolute
+    top: 0
+    left: -100%
+    width: 100%
+    height: 100%
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent)
+    transition: left 0.5s
+
+  &:hover:not(:disabled)
+    transform: translateY(-4px) scale(1.05)
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3)
+
+    &::before
+      left: 100%
+
+  &:active:not(:disabled)
+    transform: translateY(-2px) scale(1.03)
+
+  &.is-success
+    background: $success-gradient
+    color: #ffffff
+
+  &.is-danger
+    background: $danger-gradient
+    color: #ffffff
+
+  &.is-warning
+    background: $warning-gradient
+    color: #ffffff
+
+  &.is-info
+    background: $info-gradient
+    color: #363636
+    font-weight: 700
+
+  &.is-primary
+    background: $primary-gradient
+    color: #ffffff
+
+  &.is-small
+    padding: 0.5rem 1rem
+    font-size: 0.9rem
+    border-radius: 10px
+
+  &.is-large
+    padding: 1.8rem 3rem
+    font-size: 1.2rem
+
+  &:disabled
+    opacity: 0.4
+    cursor: not-allowed
+    transform: none !important
+    box-shadow: none
+
+// Select personalizado moderno
+.custom-select
+  appearance: none
+  -webkit-appearance: none
+  -moz-appearance: none
+  width: 100%
+  max-width: 500px
+  margin: 0 auto
+  display: block
+  background: rgba(255, 255, 255, 0.1)
+  backdrop-filter: blur(10px)
+  border: 2px solid rgba(255, 255, 255, 0.2)
+  border-radius: 15px
+  color: #ffffff
+  font-size: 1.3rem
+  padding: 1.3rem 3.5rem 1.3rem 2rem
+  font-weight: 600
+  cursor: pointer
+  transition: all 0.3s ease
+  text-transform: capitalize
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")
+  background-repeat: no-repeat
+  background-position: right 1.5rem center
+  background-size: 1.8rem
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1)
+
+  &:hover
+    border-color: #667eea
+    background: rgba(255, 255, 255, 0.15)
+
+  &:focus
+    border-color: #667eea
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3), 0 8px 16px rgba(0, 0, 0, 0.2)
+    outline: none
+    background: rgba(255, 255, 255, 0.15)
+
+  option
+    background: #2a2550
+    color: #ffffff
+    padding: 1rem
+    font-weight: 500
+
+// Lista de participantes mejorada
+.content
+  max-height: 450px
+  overflow-y: auto
+  overflow-x: hidden
+  padding-right: 0.5rem
+
+  &::-webkit-scrollbar
+    width: 6px
+
+  &::-webkit-scrollbar-track
+    background: rgba(255, 255, 255, 0.05)
+    border-radius: 10px
+
+  &::-webkit-scrollbar-thumb
+    background: $primary-gradient
+    border-radius: 10px
+
+    &:hover
+      background: linear-gradient(135deg, #576dd8 0%, #664090 100%)
+
+  scrollbar-width: thin
+  scrollbar-color: #667eea rgba(255, 255, 255, 0.05)
+
+.participant-item
+  display: flex
+  justify-content: space-between
+  align-items: center
+  padding: 1.2rem 1.5rem
+  margin: 0.8rem 0
+  background: rgba(255, 255, 255, 0.08)
+  max-width: 100%
+  backdrop-filter: blur(10px)
+  border-left: 4px solid transparent
+  border-image: $primary-gradient 1
+  border-radius: 0 12px 12px 0
+  transition: all 0.3s ease
+  animation: slideInRight 0.4s ease-out
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1)
+
+  &:hover
+    background: rgba(255, 255, 255, 0.12)
+    transform: translateX(5px) scale(1.01)
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.2)
+
+  .participant-name
+    flex: 1
+    font-weight: 600
+    font-size: 1.1rem
+    color: #ffffff
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
+    margin-right: 1rem
+
+  .participant-actions
+    display: flex
+    gap: 0.8rem
+    flex-shrink: 0
+
+// Tarjeta de palabra principal
+.notification.is-primary
+  background: $primary-gradient
+  border-radius: 25px
+  padding: 4rem 2rem
+  min-height: 250px
+  display: flex
+  align-items: center
+  justify-content: center
+  animation: scaleIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+  box-shadow: 0 15px 50px rgba(102, 126, 234, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.2) inset
+  position: relative
+  overflow: hidden
+
+  &::before
+    content: ''
+    position: absolute
+    top: -50%
+    left: -50%
+    width: 200%
+    height: 200%
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%)
+    animation: float 6s ease-in-out infinite
+
+  .title
+    color: #ffffff
+    font-size: 3.5rem
+    font-weight: 900
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3)
+    animation: pulse 2s ease-in-out infinite
+    letter-spacing: 2px
+    z-index: 1
+    position: relative
+
+// Colores de texto
+.has-text-primary
+  color: #667eea !important
+  font-weight: 700
+  text-shadow: 0 2px 8px rgba(102, 126, 234, 0.3)
+
+.has-text-success
+  background: $success-gradient
+  background-clip: text
+  -webkit-background-clip: text
+  -webkit-text-fill-color: transparent
+  font-weight: 800 !important
+  font-size: 3rem !important
+  filter: drop-shadow(0 2px 8px rgba(79, 172, 254, 0.4))
+
+.has-text-warning
+  background: $warning-gradient
+  background-clip: text
+  -webkit-background-clip: text
+  -webkit-text-fill-color: transparent
+  font-weight: 700
+  font-size: 1.5rem
+  filter: drop-shadow(0 2px 8px rgba(250, 112, 154, 0.3))
+
+.has-text-grey
+  color: rgba(255, 255, 255, 0.6) !important
+
+// Botones centrados
+.buttons.is-centered
+  margin-top: 2rem
+  gap: 1.5rem
+  flex-wrap: wrap
+
+  .button
+    min-width: 180px
+
+// Sección del ganador espectacular
 .winner-container
   position: relative
   overflow: hidden
-  padding: 3rem 2rem
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)
-  border-radius: 16px
-  box-shadow: 0 20px 60px rgba(0,0,0,0.3)
+  padding: 4rem 2rem
+  background: $primary-gradient
+  border-radius: 25px
+  box-shadow: 0 20px 60px rgba(102, 126, 234, 0.4)
+  animation: glow 2s ease-in-out infinite
 
   .winner-title
-    animation: celebration 2s ease-in-out infinite, glow 2s ease-in-out infinite
+    animation: celebration 2s ease-in-out infinite, goldGlow 2s ease-in-out infinite
     color: #ffd700 !important
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8)
-    font-size: 3.5rem !important
+    font-size: 4rem !important
     font-weight: 900 !important
+    margin-bottom: 1.5rem
 
   .winner-name
-    animation: bounceIn 1s ease-out, pulse 2s ease-in-out infinite 1s
+    animation: fadeInUp 1s ease-out, pulse 2s ease-in-out infinite 1s
     color: #ffffff !important
-    font-size: 2.5rem !important
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.4)
+    font-size: 3rem !important
     font-weight: 800 !important
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4)
+    margin-bottom: 1rem
 
   .winner-score
-    animation: fadeIn 1.5s ease-out
+    animation: fadeInUp 1.5s ease-out
     color: #ffd700 !important
-    font-size: 2rem !important
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3)
+    font-size: 2.2rem !important
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3)
 
-// Efecto confetti
+// Confetti
 .confetti
   position: absolute
-  width: 10px
-  height: 10px
+  width: 12px
+  height: 12px
   border-radius: 50%
   animation: confetti 3s ease-in-out infinite
 
   &:nth-child(1)
     left: 10%
     background: #ff6b6b
-    animation-delay: 0s
-
+    animation-delay: 0.2s
+    
   &:nth-child(2)
     left: 20%
     background: #4ecdc4
-    animation-delay: 0.2s
-
+    animation-delay: 0.4s
+    
   &:nth-child(3)
     left: 30%
     background: #ffe66d
-    animation-delay: 0.4s
-
+    animation-delay: 0.6s
+    
   &:nth-child(4)
     left: 40%
     background: #95e1d3
-    animation-delay: 0.6s
-
+    animation-delay: 0.8s
+    
   &:nth-child(5)
     left: 50%
     background: #f38181
-    animation-delay: 0.8s
-
+    animation-delay: 1s
+    
   &:nth-child(6)
     left: 60%
     background: #aa96da
-    animation-delay: 1s
-
+    animation-delay: 1.2s
+    
   &:nth-child(7)
     left: 70%
     background: #fcbad3
-    animation-delay: 1.2s
-
+    animation-delay: 1.4s
+    
   &:nth-child(8)
     left: 80%
     background: #a8e6cf
-    animation-delay: 1.4s
-
+    animation-delay: 1.6s
+    
   &:nth-child(9)
     left: 90%
     background: #ffd3b6
-    animation-delay: 1.6s
-
+    animation-delay: 1.8s
+    
   &:nth-child(10)
     left: 15%
     background: #ff8b94
-    animation-delay: 1.8s
+    animation-delay: 2s
 
-// Fireworks decorativos
+// Fireworks
 .firework
   position: absolute
-  width: 50px
-  height: 50px
-  border: 3px solid #ffd700
+  width: 60px
+  height: 60px
+  border: 4px solid #ffd700
   border-radius: 50%
   animation: firework 2s ease-out infinite
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.5)
 
-  &:nth-child(1)
+  &:nth-child(11)
     top: 20%
     left: 10%
-    animation-delay: 0s
-
-  &:nth-child(2)
+    animation-delay: 0.5s
+    
+  &:nth-child(12)
     top: 30%
     right: 10%
-    animation-delay: 0.5s
-
-  &:nth-child(3)
+    animation-delay: 1s
+    
+  &:nth-child(13)
     bottom: 30%
     left: 15%
-    animation-delay: 1s
-
-  &:nth-child(4)
+    animation-delay: 1.5s
+    
+  &:nth-child(14)
     bottom: 20%
     right: 15%
-    animation-delay: 1.5s
+    animation-delay: 2s
 
-// Mejora visual del fondo del container principal
-.section
-  background: transparent
-
-// Estilos para la sección de puntajes
+// Sección de puntajes
 .scores-section
-  margin-top: 2rem
-  padding: 2rem
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%)
-  border-radius: 12px
-  animation: fadeIn 1s ease-out
+  margin-top: 3rem
+  padding: 2.5rem
+  background: rgba(255, 255, 255, 0.08)
+  backdrop-filter: blur(20px)
+  border-radius: 25px
+  animation: fadeInUp 1s ease-out
+  border: 1px solid rgba(255, 255, 255, 0.1)
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2)
+  overflow: hidden
 
   .scores-title
     text-align: center
-    color: #363636
-    font-size: 2rem !important
-    font-weight: 800
-    margin-bottom: 1.5rem
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.1)
+    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)
+    background-clip: text
+    -webkit-background-clip: text
+    -webkit-text-fill-color: transparent
+    font-size: 2.5rem !important
+    font-weight: 900
+    margin-bottom: 2rem
+    filter: drop-shadow(0 4px 10px rgba(255, 215, 0, 0.3))
 
 .scores-list
-  max-width: 600px
+  max-width: 700px
   margin: 0 auto
   max-height: 500px
   overflow-y: auto
+  overflow-x: hidden
   padding-right: 0.5rem
 
-  // Estilos personalizados del scrollbar
   &::-webkit-scrollbar
-    width: 8px
+    width: 6px
 
   &::-webkit-scrollbar-track
-    background: rgba(0,0,0,0.05)
+    background: rgba(255, 255, 255, 0.05)
     border-radius: 10px
 
   &::-webkit-scrollbar-thumb
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)
+    background: $primary-gradient
     border-radius: 10px
 
     &:hover
       background: linear-gradient(135deg, #576dd8 0%, #664090 100%)
 
-  // Para Firefox
   scrollbar-width: thin
-  scrollbar-color: #667eea rgba(0,0,0,0.05)
+  scrollbar-color: #667eea rgba(255, 255, 255, 0.05)
 
 .score-item
   display: flex
   align-items: center
-  padding: 1rem 1.5rem
-  margin: 0.8rem 0
-  background: white
-  border-radius: 12px
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1)
-  transition: all 0.3s ease
+  padding: 1.5rem 2rem
+  margin: 1rem 0
+  background: rgba(255, 255, 255, 0.1)
+  backdrop-filter: blur(10px)
+  border-radius: 20px
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15)
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)
   animation: slideInRight 0.5s ease-out
-  border-left: 5px solid transparent
+  border: 1px solid rgba(255, 255, 255, 0.1)
+  max-width: 100%
 
   &:hover
-    transform: translateX(10px)
-    box-shadow: 0 6px 16px rgba(0,0,0,0.15)
+    transform: translateX(8px) scale(1.02)
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3)
+    background: rgba(255, 255, 255, 0.15)
 
   &:nth-child(1)
-    border-left-color: #ffd700
-    background: linear-gradient(90deg, rgba(255, 215, 0, 0.1) 0%, white 20%)
+    background: linear-gradient(90deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 255, 255, 0.1) 30%)
+    border-left: 6px solid #ffd700
 
   &:nth-child(2)
-    border-left-color: #c0c0c0
-    background: linear-gradient(90deg, rgba(192, 192, 192, 0.1) 0%, white 20%)
+    background: linear-gradient(90deg, rgba(192, 192, 192, 0.2) 0%, rgba(255, 255, 255, 0.1) 30%)
+    border-left: 6px solid #c0c0c0
 
   &:nth-child(3)
-    border-left-color: #cd7f32
-    background: linear-gradient(90deg, rgba(205, 127, 50, 0.1) 0%, white 20%)
-
-  &:nth-child(n+4)
-    border-left-color: #00d1b2
+    background: linear-gradient(90deg, rgba(205, 127, 50, 0.2) 0%, rgba(255, 255, 255, 0.1) 30%)
+    border-left: 6px solid #cd7f32
 
 .score-rank
-  margin-right: 1.5rem
+  margin-right: 2rem
 
-  .rank-number
-    display: flex
-    align-items: center
-    justify-content: center
-    width: 50px
-    height: 50px
-    border-radius: 50%
-    font-size: 1.5rem
-    font-weight: 800
-    background: linear-gradient(135deg, #00d1b2 0%, #00947e 100%)
-    color: white
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2)
-    transition: all 0.3s ease
+.rank-number
+  display: flex
+  align-items: center
+  justify-content: center
+  width: 60px
+  height: 60px
+  border-radius: 50%
+  font-size: 1.8rem
+  font-weight: 900
+  background: $primary-gradient
+  color: #ffffff
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25)
+  transition: all 0.3s ease
 
-    &.gold
-      background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)
-      color: #363636
-      animation: pulse 2s ease-in-out infinite
-      box-shadow: 0 6px 16px rgba(255, 215, 0, 0.4)
+  &.gold
+    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)
+    color: #363636
+    animation: pulse 2s ease-in-out infinite
+    box-shadow: 0 10px 25px rgba(255, 215, 0, 0.5)
 
-    &.silver
-      background: linear-gradient(135deg, #c0c0c0 0%, #e8e8e8 100%)
-      color: #363636
-      box-shadow: 0 6px 12px rgba(192, 192, 192, 0.4)
+  &.silver
+    background: linear-gradient(135deg, #c0c0c0 0%, #e8e8e8 100%)
+    color: #363636
+    box-shadow: 0 8px 20px rgba(192, 192, 192, 0.4)
 
-    &.bronze
-      background: linear-gradient(135deg, #cd7f32 0%, #e89b5f 100%)
-      color: white
-      box-shadow: 0 6px 12px rgba(205, 127, 50, 0.4)
+  &.bronze
+    background: linear-gradient(135deg, #cd7f32 0%, #e89b5f 100%)
+    color: #ffffff
+    box-shadow: 0 8px 20px rgba(205, 127, 50, 0.4)
 
 .score-info
   flex: 1
@@ -639,33 +690,87 @@ h1.title.is-1
   align-items: center
 
   .couple-name
-    font-size: 1.2rem
+    font-size: 1.3rem
     font-weight: 600
-    color: #363636
+    color: #ffffff
 
   .couple-score
-    font-size: 1.4rem
-    font-weight: 700
-    color: #00d1b2
-    background: rgba(0, 209, 178, 0.1)
-    padding: 0.3rem 1rem
-    border-radius: 20px
+    font-size: 1.6rem
+    font-weight: 800
+    background: $success-gradient
+    background-clip: text
+    -webkit-background-clip: text
+    -webkit-text-fill-color: transparent
+    padding: 0.5rem 1.5rem
+    border-radius: 25px
+    background-color: rgba(79, 172, 254, 0.1)
+    backdrop-filter: blur(5px)
+    box-shadow: 0 4px 12px rgba(79, 172, 254, 0.2)
 
-// Responsive para tabla de puntajes
+// Responsive Design
 @media screen and (max-width: 768px)
+  .container
+    padding: 1rem 0.5rem
+
+  .title.is-1
+    font-size: 2.5rem !important
+
+  .notification.is-primary .title
+    font-size: 2.5rem !important
+
+  .button
+    padding: 1.2rem 2rem
+    font-size: 0.9rem
+
+    &.is-large
+      padding: 1.5rem 2.5rem
+
+  .buttons.is-centered .button
+    min-width: 140px
+
+  .custom-select
+    font-size: 1.1rem
+    padding: 1rem 3rem 1rem 1.5rem
+
+  .winner-container
+    .winner-title
+      font-size: 2.5rem !important
+
+    .winner-name
+      font-size: 2rem !important
+
+    .winner-score
+      font-size: 1.6rem !important
+
   .scores-section
-    padding: 1rem
+    padding: 1.5rem
 
   .score-item
-    padding: 0.8rem 1rem
+    padding: 1rem 1.2rem
 
     .couple-name
       font-size: 1rem !important
 
     .couple-score
-      font-size: 1.1rem !important
+      font-size: 1.2rem !important
+      padding: 0.3rem 1rem
 
-  .score-rank .rank-number
-    width: 40px
-    height: 40px
-    font-size: 1.2rem
+  .rank-number
+    width: 45px
+    height: 45px
+    font-size: 1.3rem
+
+  .score-rank
+    margin-right: 1rem
+
+// Mejoras adicionales
+.section
+  background: transparent
+
+.block
+  animation: fadeInUp 0.6s ease-out
+
+// Texto en gris
+p.has-text-grey
+  font-style: italic
+  font-size: 1rem

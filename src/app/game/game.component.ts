@@ -5,6 +5,7 @@ import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular
 import {v4 as uuidv4} from 'uuid';
 import {map, Observable, takeWhile, timer} from "rxjs";
 import {shuffle} from "../array.utils";
+import Swal from 'sweetalert2';
 
 type Couple = { id: string; name: string, score: number; };
 
@@ -84,8 +85,32 @@ export class GameComponent implements OnInit {
     }
   }
 
-  editCouple(couple: Couple): void {
-    const newName = prompt('Editar nombre de la pareja:', couple.name);
+  async editCouple(couple: Couple): Promise<void> {
+    const { value: newName } = await Swal.fire({
+      title: '✏️ Editar Pareja',
+      input: 'text',
+      inputLabel: 'Nuevo nombre de la pareja',
+      inputValue: couple.name,
+      showCancelButton: true,
+      confirmButtonText: 'Guardar',
+      cancelButtonText: 'Cancelar',
+      inputValidator: (value) => {
+        if (!value || !value.trim()) {
+          return 'El nombre no puede estar vacío';
+        }
+        return null;
+      },
+      confirmButtonColor: '#4facfe',
+      cancelButtonColor: '#ff6b6b',
+      background: 'rgba(42, 37, 80, 0.95)',
+      color: '#ffffff',
+      customClass: {
+        popup: 'swal-glass',
+        confirmButton: 'swal-button-confirm',
+        cancelButton: 'swal-button-cancel'
+      }
+    });
+
     if (newName && newName.trim()) {
       couple.name = newName.trim();
     }
@@ -95,9 +120,21 @@ export class GameComponent implements OnInit {
     this.startingCouples = this.startingCouples.filter(c => c.id !== coupleId);
   }
 
-  startGame() {
+  async startGame(): Promise<void> {
     if (this.startingCouples.length <= 1) {
-      alert('Number of couples must be greater than 1');
+      await Swal.fire({
+        icon: 'warning',
+        title: '⚠️ Atención',
+        text: 'Necesitas al menos 2 parejas para comenzar el juego',
+        confirmButtonText: 'Entendido',
+        confirmButtonColor: '#ff6b6b',
+        background: 'rgba(42, 37, 80, 0.95)',
+        color: '#ffffff',
+        customClass: {
+          popup: 'swal-glass'
+        }
+      });
+      return;
     }
     // Load couples from input
     shuffle(this.startingCouples);
@@ -161,13 +198,52 @@ export class GameComponent implements OnInit {
     }
   }
 
-  resetGame() {
-    const confirmed = confirm('¿Estás seguro de que deseas reiniciar el juego? Se perderán todos los puntajes actuales.');
-    if (confirmed) {
+  async resetGame(): Promise<void> {
+    const result = await Swal.fire({
+      icon: 'question',
+      title: '🔄 Reiniciar Juego',
+      text: '¿Estás seguro de que deseas reiniciar el juego? Se perderán todos los puntajes actuales.',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, reiniciar',
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#4facfe',
+      cancelButtonColor: '#ff6b6b',
+      background: 'rgba(42, 37, 80, 0.95)',
+      color: '#ffffff',
+      customClass: {
+        popup: 'swal-glass',
+        confirmButton: 'swal-button-confirm',
+        cancelButton: 'swal-button-cancel'
+      }
+    });
+
+    if (result.isConfirmed) {
       this.timerRunning = false;
       this.isPaused = false;
       this.pausedTimeRemaining = 0;
-      this.restartGame();
+      
+      // Recuperar todas las parejas (las que ya jugaron + las que están por jugar + la actual)
+      const allCouples = [
+        ...this.endingCouples,
+        ...this.startingCouples,
+        ...(this.currentCouple ? [this.currentCouple] : [])
+      ];
+      
+      // Reiniciar puntajes
+      this.startingCouples = allCouples.map(couple => ({
+        ...couple,
+        score: 0
+      }));
+      
+      this.endingCouples = [];
+      this.currentCouple = null;
+      this.gameStarted = false;
+      this.isCouplePlaying = false;
+      this.hasSelectedCategory = false;
+      this.selectedCategory = '';
+      this.roundEnded = false;
+      this.winner = null;
+      this.hasATie = false;
     }
   }
 

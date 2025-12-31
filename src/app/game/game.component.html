@@ -1,5 +1,4 @@
 <div class="container">
-  <br>
   <div class="block">
     <h1 class="title is-1 has-text-centered">🎭 Chirrins' Charadas 🎉</h1>
   </div>
@@ -9,12 +8,13 @@
         <div class="box">
           <div [formGroup]="form" class="has-text-centered">
             <div class="field">
-              <label class="label">Ingresa nombre de una pareja</label>
+              <label class="label">👥 Ingresa nombre de una pareja</label>
               <input class="input" (keydown.enter)="addCouple()" formControlName="coupleName"
-                     placeholder="E.g., Pedro y Ana, Samuel y Paola">
+                     placeholder="Ej: Pedro y Ana, Samuel y Paola">
             </div>
             <div class="block has-text-centered">
-              <button type="submit" class="button is-success is-large" (click)="addCouple()">➕ Añadir
+              <button type="submit" class="button is-success is-large" (click)="addCouple()">
+                ➕ Añadir Pareja
               </button>
             </div>
           </div>
@@ -23,7 +23,7 @@
       <div class="column">
         <div class="box">
           <div class="block has-text-centered">
-            <h2 class="title is-4">Participantes</h2>
+            <h2 class="title is-4">🎯 Participantes Registrados</h2>
             <div class="content" *ngIf="startingCouples.length > 0">
               <div *ngFor="let couple of startingCouples" class="participant-item">
                 <span class="participant-name">{{ couple.name }}</span>
@@ -33,13 +33,16 @@
                 </div>
               </div>
             </div>
-            <p *ngIf="startingCouples.length === 0" class="has-text-grey">No hay parejas inscritas</p>
+            <p *ngIf="startingCouples.length === 0" class="has-text-grey">
+              👻 No hay parejas registradas aún
+            </p>
           </div>
           <div class="buttons block is-centered">
-            <button class="button is-success is-large" [disabled]="startingCouples.length <= 1" (click)="startGame()">🎮 Empezar a
-              Jugar
+            <button class="button is-success is-large" [disabled]="startingCouples.length <= 1" (click)="startGame()">
+              🚀 Empezar Juego
             </button>
-            <button class="button is-danger" [disabled]="startingCouples.length <= 1" (click)="reset()">🔄 Reiniciar
+            <button class="button is-danger" [disabled]="startingCouples.length <= 1" (click)="reset()">
+              🔄 Reiniciar
             </button>
           </div>
         </div>
@@ -50,42 +53,58 @@
   <div *ngIf="gameStarted" class="section">
     <div *ngIf="!hasSelectedCategory" class="box has-text-centered">
       <div class="field">
-        <label class="label">📋 Selecciona una Categoría:</label>
+        <label class="label">📋 Selecciona una Categoría</label>
         <div class="control">
           <select class="custom-select" [(ngModel)]="selectedCategory">
-            <option value='' disabled selected>Seleccione una categoría</option>
+            <option value='' disabled selected>🎲 Elige tu categoría favorita</option>
             <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
           </select>
         </div>
       </div>
       <br>
-      <button class="button is-info is-large" (click)="loadWords()" [disabled]="!selectedCategory">▶️ Siguiente</button>
+      <button class="button is-info is-large" (click)="loadWords()" [disabled]="!selectedCategory">
+        ▶️ Continuar
+      </button>
     </div>
 
     <div *ngIf="currentCouple && !roundEnded" class="box has-text-centered">
-      <h2 *ngIf="!isCouplePlaying" class="title is-2">Pareja <span
-        class="has-text-primary">{{currentCouple.name}}</span>, les toca jugar</h2>
-      <h3 class="title is-3" *ngIf="isCouplePlaying">Jugando: <span
-        class="has-text-primary">{{currentCouple.name}}</span></h3>
-      <h4 class="subtitle is-4">Categoría: <span class="has-text-warning"> {{ selectedCategory }} </span></h4>
+      <h2 *ngIf="!isCouplePlaying" class="title is-2">
+        🎮 Turno de: <span class="has-text-primary">{{currentCouple.name}}</span>
+      </h2>
+      <h3 class="title is-3" *ngIf="isCouplePlaying">
+        ⚡ Jugando: <span class="has-text-primary">{{currentCouple.name}}</span>
+      </h3>
+      <h4 class="subtitle is-4">📂 Categoría: <span class="has-text-warning">{{ selectedCategory }}</span></h4>
       <br>
-      <h2 class="title is-2">Puntaje: <span class="has-text-success">{{ currentCouple.score }}</span></h2>
+      <h2 class="title is-2">🏆 Puntaje: <span class="has-text-success">{{ currentCouple.score }}</span></h2>
       <div class="buttons block is-centered">
-        <button [disabled]="isCouplePlaying || isPaused" class="button is-warning is-large" (click)="startRound()">🚀 Comenzar</button>
-        <button *ngIf="isCouplePlaying && !isPaused" class="button is-warning is-large" (click)="pauseGame()">⏸️ Pausar</button>
-        <button *ngIf="isCouplePlaying && isPaused" class="button is-info is-large" (click)="resumeGame()">▶️ Reanudar</button>
-        <button *ngIf="isCouplePlaying" class="button is-danger is-large" (click)="resetGame()">🔄 Reiniciar</button>
+        <button [disabled]="isCouplePlaying || isPaused" class="button is-warning is-large" (click)="startRound()">
+          🚀 Comenzar
+        </button>
+        <button *ngIf="isCouplePlaying && !isPaused" class="button is-warning is-large" (click)="pauseGame()">
+          ⏸️ Pausar
+        </button>
+        <button *ngIf="isCouplePlaying && isPaused" class="button is-info is-large" (click)="resumeGame()">
+          ▶️ Reanudar
+        </button>
+        <button *ngIf="isCouplePlaying" class="button is-danger is-large" (click)="resetGame()">
+          🔄 Reiniciar
+        </button>
       </div>
     </div>
 
     <div *ngIf="isCouplePlaying" class="box has-text-centered">
-      <h4 class="subtitle is-4">⏱️ Tiempo Disponible: {{ timer$ | async | date:'mm:ss' }} </h4>
+      <h4 class="subtitle is-4">⏱️ Tiempo Restante: {{ timer$ | async | date:'mm:ss' }}</h4>
       <div class="block notification is-primary">
-        <h2 class="title is-2 is-capitalized"> {{ isPaused ? '⏸️ PAUSADO' : words[0] }} </h2>
+        <h2 class="title is-2 is-capitalized">{{ isPaused ? '⏸️ JUEGO PAUSADO' : words[0] }}</h2>
       </div>
       <div class="buttons block is-centered">
-        <button class="button is-success" (click)="correctWord()" [disabled]="isPaused">✅ Correcto</button>
-        <button class="button is-danger" (click)="passWord()" [disabled]="isPaused">➡️ Siguiente</button>
+        <button class="button is-success is-large" (click)="correctWord()" [disabled]="isPaused">
+          ✅ ¡Correcto!
+        </button>
+        <button class="button is-danger is-large" (click)="passWord()" [disabled]="isPaused">
+          ⏭️ Siguiente
+        </button>
       </div>
     </div>
 
@@ -109,17 +128,17 @@
         <div class="firework"></div>
         <div class="firework"></div>
         
-        <h2 class="title is-2 winner-title">🎊¡Tenemos un ganador!🎊</h2>
-        <h3 class="title is-4 winner-name">La pareja ganadora fue: {{ winner.name }}</h3>
-        <h4 class="subtitle is-5 winner-score">Puntaje: {{ winner.score }} </h4>
+        <h2 class="title is-2 winner-title">🎊 ¡TENEMOS UN GANADOR! 🎊</h2>
+        <h3 class="title is-4 winner-name">🏆 La pareja ganadora: {{ winner.name }}</h3>
+        <h4 class="subtitle is-5 winner-score">⭐ Puntaje Final: {{ winner.score }} puntos</h4>
       </div>
 
       <div *ngIf="hasATie" class="has-text-centered">
-        <h2 class="title is-2">¡Ha habido un empate!</h2>
+        <h2 class="title is-2">🤝 ¡Ha habido un empate increíble!</h2>
       </div>
 
       <div class="scores-section">
-        <h3 class="title is-4 scores-title">🏆 Tabla de Puntajes 🏆</h3>
+        <h3 class="title is-4 scores-title">🏆 Tabla de Clasificación 🏆</h3>
         <div class="scores-list">
           <div *ngFor="let couple of endingCouples; let i = index" class="score-item">
             <div class="score-rank">
@@ -135,7 +154,9 @@
         </div>
       </div>
       <div class="has-text-centered">
-        <button class="button is-primary is-large" (click)="restartGame()">🔁 Volver a Jugar</button>
+        <button class="button is-primary is-large" (click)="restartGame()">
+          🔁 Nueva Partida
+        </button>
       </div>
     </div>
   </div>
